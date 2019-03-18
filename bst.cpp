@@ -3,7 +3,7 @@
 #include "bst.h"
 #include <iostream>
 #include <queue>
-// HELPER FUNCTIONS HERE...
+
 template <class T>
 BST<T>::BST(){
 	root = NULL;
@@ -12,7 +12,7 @@ BST<T>::BST(){
 template <class T>
 BST<T>:: ~BST(){
 
-    // your destructor code goes here
+    
 }
 
 template <class T>
@@ -50,7 +50,6 @@ int BST<T> :: balanceFactor(node<T>* p){
 
 template <class T>
 void BST<T> :: fixHeight(node<T>* p){
-    // use this function to fix height of a node after insertion or deletion.
     p->height = height(p);
 }
 
@@ -95,7 +94,7 @@ template <class T>
 node<T>* BST<T> :: balance(node<T>* p){
     //fixHeight(p);
     //return p;
-    // Balancing code goes here. You might need to find balance factor and call appropriate rotations.
+	
     int bal = balanceFactor(p);
 
     //cout<<"1"<<endl;
@@ -142,60 +141,12 @@ node<T>* BST<T> :: balance(node<T>* p){
 template <class T>
 void BST<T> :: insert(string value,T k){
 
-    /*if (root == NULL)
-    {*/
     root = insertHelper(value,k,root);
-       /* root = new node<T>(k, value);
-    }
 
-    else
-    {
-        insertHelper(value, k, root);
-    }
-
-    //fixHeight(temp);
-    //balance(root);*/
 }
 // insertion helpe  r
 template <class T>
-node<T>* BST<T> :: insertHelper(string value,T k, node<T> *p) { // note we need a helper because we need recursive calls
-    // Insertion code goes here.
-
-    /*if (p == NULL)
-    {
-        return p;
-    }
-    else if (k < p->key)
-    {
-        if (p->left == NULL)
-        {
-            node<T>* temp = new node<T>(k, value);
-            p->left = temp;
-                //return temp;
-            //return balance(temp);
-        }
-
-        else
-        {
-            insertHelper(value, k, p->left);
-        }
-    }
-
-    else if (k > p->key)
-    {
-        if (p->right == NULL)
-        {
-            node<T>* temp = new node<T>(k, value);
-            p->right = temp;
-            //return temp;
-            //return balance(temp);
-        }
-
-        else
-        {
-            insertHelper(value, k, p->right);
-        }
-    }*/
+node<T>* BST<T> :: insertHelper(string value,T k, node<T> *p) {
 
     if (p == NULL)
     {
@@ -291,19 +242,7 @@ node<T>* BST<T>::removemin(node<T>* p) {
             else
             {
                 node<T>* temp = searchParent(p, root);
-                //if (temp != root)
-                //{temp->left = NULL;}
-                //temp->right = NULL;
-                /*if (temp->right == p)
-                {
-                    temp->right = NULL;
-                }
-                else if (temp->left == p)
-                {
-                    temp->left = NULL;
-                }*/
                 temp->left = NULL;
-                //return temp;
             }
         }
     }
@@ -335,10 +274,6 @@ node<T>*  BST<T>::remove(node<T>* p, T k) // k key deletion from p tree
                 p->value = rt_subtree_min_value;
                 //return balance(p);
 
-                /*node<T>* min = findmin(p->right);
-                p->key = min->key;
-                p->value = min->value;
-                p->right = removemin(p->right);*/
             }
 
             else if (p->left == NULL ^ p->right == NULL)
@@ -362,26 +297,6 @@ node<T>*  BST<T>::remove(node<T>* p, T k) // k key deletion from p tree
 
             else if (p->left == NULL && p->right == NULL)
             {
-                /*node<T>* temp = searchParent(p, root);
-                if (temp == root)
-                {
-                    root->key = NULL;
-                    root->value = "";
-                    root->left = NULL;
-                    root->right = NULL;
-                }
-
-                else if (temp->right == p)
-                {
-                    temp->right = NULL;
-                    return temp->right;
-                }
-
-                else
-                {
-                    temp->left = NULL;
-                    return temp->left;
-                }*/
 
                 node<T>* temp = searchParent(p, root);
                 if (temp->left == p)
@@ -419,63 +334,7 @@ node<T>*  BST<T>::remove(node<T>* p, T k) // k key deletion from p tree
 
     p =  balance(p);
     return p;
-    /*if (p == NULL)
-    {
-        return p;
-    }
-
-    else
-    {
-        if (k < p->key)
-        {
-            p->left = remove(p->left, k);
-        }
-
-        else if (k > p->key)
-        {
-            p->right = remove(p->right, k);
-        }
-
-        else if (k == p->key)
-        {
-            if (p->left == NULL && p->right == NULL)
-            {
-                delete p;
-                p = NULL;
-            }
-
-            else if (p->left == NULL ^ p->right == NULL)
-            {
-                if (p->left == NULL)
-                {
-                    node<T>* temp = p;
-                    p = p->right;
-                    delete temp;
-                    return p;
-                }
-
-                else if (p->right == NULL)
-                {
-                    node<T>* temp = p;
-                    p=p->left;
-                    delete temp;
-                    return p;
-                }
-            }
-
-            else if (p->left != NULL && p->right != NULL)
-            {
-                T rt_subtree_min_key = (findmin(p->right))->key;
-                string rt_subtree_min_value = (findmin(p->right))->value;
-                removemin(p->right);
-                p->key = rt_subtree_min_key;
-                p->value = rt_subtree_min_value;
-                //return balance(p);
-            }
-        }
-    }
-
-    return balance(p);*/
+   
 }
 
 
